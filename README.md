@@ -49,8 +49,12 @@ Dependencies
 
 * python3
 * pip3
+* python3-rtmidi2
+* python3-decorator
+* python3-watchdog
 
-Install the following python packages from pip.
+You can install the python packages from pip with the following.
+
 ```sudo pip3 install rtmidi2 decorator watchdog```
 
 TODO
