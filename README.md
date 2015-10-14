@@ -16,8 +16,7 @@ Into the functions is passed the instrument to play, the current beat and the cu
 
 Editing and saving the file causes all functions to get reloaded on the start of the next bar.
 
-
-```Python demo.py
+```Python
 import instruments
 import random
 
@@ -31,12 +30,15 @@ instruments.midi_instrument = instruments.Midi(0)
 
 @instruments.midi
 def drums(i,b,bar):
+    # play a sequence of 4 notes, one on each beat
     i.seq(b, [35,-1,38,-1], chan=1)
+    # play a single note every beat
     i.note(42, vel=random.random()*80+20, chan=1)
 
 
 @instruments.midi
 def synth(i,b,bar):
+    # play a seqeunce of 3 notes one on each beat
     i.seq(b, [32,35,37], vel=random.random()*80+20, chan=2)
 ```
 
@@ -51,5 +53,12 @@ Dependencies
 Install the following python packages from pip.
 ```sudo pip3 install rtmidi2 decorator watchdog```
 
+TODO
+----
 
+* Better underlying timing model
+* Support more instruments than just midi
+* Clean-up & simplify syntax
+* Scales
+* Fix allowing of loading files in different directories
 
