@@ -8,7 +8,7 @@ Usage
 -----
 Currently you have to run b0rkenlive on files in the root of the git directory.
 
-python3 b0rkenlive.py demo.py
+```python3 b0rkenlive.py demo.py```
 
 All function with an instrument decorator get run in parallel on separate threads. The functions are called every beat.
 
