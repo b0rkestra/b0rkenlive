@@ -3,6 +3,7 @@ b0rkenlive
 
 b0rkenlive is a live coding music/midi framework built with python. It breaks a lot and does bad and weird things with the python module import system.
 
+[Quick Demo Video](https://www.youtube.com/watch?v=QRnDNEKzn68)
 
 Usage
 -----
@@ -49,13 +50,14 @@ Dependencies
 
 * python3
 * pip3
+* pyhton3-cython
 * python3-rtmidi2
 * python3-decorator
 * python3-watchdog
 
 You can install the python packages from pip with the following.
 
-```sudo pip3 install rtmidi2 decorator watchdog```
+```sudo pip3 install cython rtmidi2 decorator watchdog```
 
 TODO
 ----
