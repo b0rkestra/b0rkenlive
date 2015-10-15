@@ -58,6 +58,7 @@ Dependencies
 You can install the python packages from pip with the following (note: cython needs to be installed first).
 
 ```sudo pip3 install cython```
+
 ```sudo pip3 install rtmidi2 decorator watchdog```
 
 TODO
