@@ -4,6 +4,8 @@ import rtmidi2
 from threading import Thread
 from queue import Queue
 
+debug = False
+
 #from pythonosc import osc_message_builder
 #from pythonosc import udp_client
 
@@ -33,16 +35,18 @@ class Midi(Instrument, Thread):
         self.port = port
         self.midi.open_port(self.port)
         self.note_queue = Queue()
+        self.stop = False
         self.start()
 
     def run(self):
         on_notes = []
         try:
-            while True:
+            while not self.stop:
                 #create any new instruments
                 while not self.note_queue.empty():
                     note = self.note_queue.get()
-                    print("note", note[1])
+                    if debug:
+                        print("note", note[1])
                     self.midi.send_noteon(note[0], note[1], note[2])
                     on_notes.append([note, note[3]])
                 time.sleep(0.005)
@@ -51,10 +55,17 @@ class Midi(Instrument, Thread):
                 turn_off = [n for n in on_notes if n[1] < 0.0]
                 for n_off in turn_off:
                     note = n_off[0]
-                    print("off", note[1])
+                    if debug:
+                        print("off", note[1])
                     self.midi.send_noteoff(note[0], note[1])
 
                 on_notes = [n for n in on_notes if n[1] > 0.0]
+            
+            for n_off in on_notes:
+                note = n_off[0]
+                if debug:
+                    print("off", note[1])
+                self.midi.send_noteoff(note[0], note[1])
         except KeyboardInterrupt:
             return
 

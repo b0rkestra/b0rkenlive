@@ -24,9 +24,12 @@ import random
 bpm = 400  # set the BPM
 bpb = 8    # set the number of beats per bar
 
-# This is a bit of a bodge to set-up the midi port to use.
-# The numbering of ports is shown when b0rkenlive starts.
-instruments.midi_instrument = instruments.Midi(0)
+# "setup" is a special function name, it gets called only once when the file is 
+# first loaded
+def setup():
+    # This is a bit of a bodge to set-up the midi port to use.
+    # The numbering of ports is shown when b0rkenlive starts.
+    instruments.midi_instrument = instruments.Midi(0)
 
 
 @instruments.midi

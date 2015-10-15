@@ -104,6 +104,7 @@ class ModuleReloadHandler(FileSystemEventHandler):
         self.instruments = {}
         self.instrument_thread = InstrumentThread()
         self.instrument_thread.start()
+        self.setup_called = False
         self.reload()
 
     def on_modified(self, event):
@@ -144,7 +145,13 @@ class ModuleReloadHandler(FileSystemEventHandler):
             obj = getattr(self.music, attr)
             #if hasattr(obj, '__call__'):
             if callable(obj) and attr in function_names:
-                module_instruments[attr] = obj
+                if attr == 'setup':
+                    if not self.setup_called:
+                        print('Setting up file')
+                        obj()
+                        self.setup_called = True
+                else:
+                    module_instruments[attr] = obj
 
         #create functions
         self.instrument_thread.create_queue.put(module_instruments)
